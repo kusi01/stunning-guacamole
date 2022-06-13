@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Panel extends JPanel {
     int Rows;
@@ -37,6 +38,14 @@ public class Panel extends JPanel {
     public void NextState(float ProL, float ProT){
         board.Update(ProL, ProT);
         refresh();
+    }
+
+    public void NextState2(float ProL, float ProT) throws InterruptedException {
+        while (true){
+            board.Update(ProL, ProT);
+            refresh();
+            TimeUnit.SECONDS.sleep(2);
+        }
     }
 
     public void refresh(){

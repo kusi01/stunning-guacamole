@@ -15,7 +15,6 @@ public class StartingFrame extends JFrame implements ActionListener{
     public StartingFrame() {
         super("cos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
         setSize(250, 250);
         setLocation(50, 50);
         setLayout(new FlowLayout());
@@ -36,6 +35,7 @@ public class StartingFrame extends JFrame implements ActionListener{
         add(FieldForRows);
         add(FieldForColumns);
         add(FieldForNumberOfTrees);
+        setVisible(true);
     }
 
     @Override
