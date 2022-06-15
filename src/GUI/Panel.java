@@ -14,8 +14,16 @@ public class Panel extends JPanel {
     Board board;
     JButton[][] CellsTable;
     JButton cell;
+    ImageIcon dzewo;
+    ImageIcon firek;
+    ImageIcon burek;
 
     public Panel(int Rows, int Columns, int Trees) throws IOException {
+        dzewo = new ImageIcon("resource/icons/Drzewo.png");
+        firek = new ImageIcon("resource/icons/Fire.png");
+        burek = new ImageIcon("resource/icons/Burned.png");
+
+
         this.Rows = Rows;
         this.Columns = Columns;
         board = new Board();
@@ -25,8 +33,6 @@ public class Panel extends JPanel {
         for (int row = 0; row<Rows; row++){
             for(int column = 0; column<Columns; column++){
                 cell = new JButton();
-                cell.setOpaque(true);
-                cell.setEnabled(false);
                 cell.setPreferredSize(new Dimension(20,20));
                 CellsTable[row][column] = cell;
                 add(cell);
@@ -38,14 +44,7 @@ public class Panel extends JPanel {
     public void NextState(float ProL, float ProT){
         board.Update(ProL, ProT);
         refresh();
-    }
-
-    public void NextState2(float ProL, float ProT) throws InterruptedException {
-        while (true){
-            board.Update(ProL, ProT);
-            refresh();
-            TimeUnit.SECONDS.sleep(2);
-        }
+        repaint();
     }
 
     public void refresh(){
@@ -53,13 +52,13 @@ public class Panel extends JPanel {
             for(int y = 0; y<Columns; y++){
                 String ActualValue = board.Board[x][y].getState();
                 if(ActualValue == "Tree"){
-                    CellsTable[x][y].setBackground(Color.green);
+                    CellsTable[x][y].setIcon(dzewo);
                 }
                 else if(ActualValue == "Burning"){
-                    CellsTable[x][y].setBackground(Color.red);
+                    CellsTable[x][y].setIcon(firek);
                 }
                 else{
-                    CellsTable[x][y].setBackground(Color.DARK_GRAY);
+                    CellsTable[x][y].setIcon(burek);
                 }
             }
         }

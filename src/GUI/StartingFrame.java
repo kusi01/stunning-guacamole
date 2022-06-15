@@ -38,18 +38,30 @@ public class StartingFrame extends JFrame implements ActionListener{
         setVisible(true);
     }
 
+    public static boolean isNumeric(String str) {
+        if (str.isBlank()) {return false;}
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (Start.equals(source)) {
-            int Rows = Integer.parseInt(FieldForRows.getText());
-            int Columns = Integer.parseInt(FieldForColumns.getText());
-            int Trees = Integer.parseInt(FieldForNumberOfTrees.getText());
-            try {
-                new Forest(Rows, Columns, Trees);
-                this.dispose();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if(isNumeric(FieldForRows.getText())&&isNumeric(FieldForColumns.getText())&&isNumeric(FieldForRows.getText())&&Integer.parseInt(FieldForRows.getText())*Integer.parseInt(FieldForColumns.getText())>=Integer.parseInt(FieldForNumberOfTrees.getText())) {
+                int Rows = Integer.parseInt(FieldForRows.getText());
+                int Columns = Integer.parseInt(FieldForColumns.getText());
+                int Trees = Integer.parseInt(FieldForNumberOfTrees.getText());
+                try {
+                    new Forest(Rows, Columns, Trees);
+                    this.dispose();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }

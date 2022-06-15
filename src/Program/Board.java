@@ -1,5 +1,7 @@
 package Program;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,9 +12,13 @@ public class Board {
     public float ProbabilityTree;
     public int NumberOfTrees;
     public Cell[][] Board;
+    PrintWriter zapis;
+    int ActualLoop = 0;
 
-
-    public void generator(int Rows, int Columns, int Trees){
+    public void generator(int Rows, int Columns, int Trees) throws FileNotFoundException {
+        zapis = new PrintWriter("Resource/Zapis3.txt");
+        zapis.println(Columns*Rows);
+        zapis.println(Trees);
         this.Columns = Columns;
         this.Rows = Rows;
         this.NumberOfTrees = Trees;
@@ -42,7 +48,7 @@ public class Board {
                 String ActualState = Board[x][y].getState();
                 Board2[x][y] = new Cell(x, y, ActualState);
                 if (ActualState == "Empty") {
-                    float z = random.nextInt(1, 101);
+                    float z = random.nextInt(1, 10001)/100;
                     if (z <= ProbabilityTree) {
                         Board2[x][y].SetState("Tree");
                     }
@@ -55,7 +61,7 @@ public class Board {
                                 }
                             }
                             }} if(Board[x][y].getState() == "Tree") {
-                                float p = random.nextInt(1, 101);
+                                float p = random.nextInt(1, 10001)/100;
                                 if (p <= ProbabilityLightning) {
                                     Board2[x][y].SetState("Burning");
                                 }
@@ -67,5 +73,34 @@ public class Board {
         }
                 }
         Board = Board2;
+        saveToFile();
+            }
+
+    public void saveToFile() {
+        ActualLoop++;
+        int LiczbaDrzew = 0;
+        int LiczbaOgnia = 0;
+        int LiczbaPusta = 0;
+        for(int x = 0; x<Rows; x++){
+            for(int y = 0; y<Columns; y++){
+                if(Board[x][y].getState() == "Tree"){
+                    LiczbaDrzew++;
+                }
+                else if(Board[x][y].getState() == "Burning"){
+                    LiczbaOgnia++;
+                }
+                else{LiczbaPusta++;}
             }
         }
+        zapis.println("Pętla nr:" + ActualLoop);
+        zapis.println(LiczbaDrzew);
+        zapis.println(LiczbaOgnia);
+        zapis.println(LiczbaPusta);
+        zapis.println(ProbabilityLightning);
+        zapis.println(ProbabilityTree);
+        if(ActualLoop == 100){
+            zapis.close();
+        }
+    }
+
+}
