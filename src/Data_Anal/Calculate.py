@@ -33,7 +33,7 @@ def imp_data(path):
 
 
 if __name__ == "__main__":
-    data = imp_data("../../resource/Zapis1.txt")
+    data = imp_data("../../resource/Zapis3.txt")
     number = data[0]
     tree = []
     fire = []
@@ -44,19 +44,22 @@ if __name__ == "__main__":
             tree.append(x["tree"]/number)
             fire.append(x["fire"]/number)
             none.append(x["none"]/number)
-            ratio.append(x["fire"]/(x["tree"]+x["fire"]))
+            if(x["tree"]+x["fire"] == 0):
+                ratio.append(0)
+            else:
+                ratio.append(x["fire"]/(x["tree"]+x["fire"]))
     plt.figure(figsize=(16, 4))
     plt.subplot(141)
-    plt.title("Ile jest drzew")
+    plt.title("Ile jest % nie palących się drzew")
     plt.plot(tree)
     plt.subplot(142)
-    plt.title("Ile jest palących się drzew")
+    plt.title("Ile jest % palących się drzew")
     plt.plot(fire, "r")
     plt.subplot(143)
-    plt.title("Ile pól jest pustych")
+    plt.title("Jaki % pól jest pustych")
     plt.plot(none, "k")
     plt.subplot(144)
-    plt.title("Ile drzew się pali")
+    plt.title("Ile % drzew jest palących się")
     plt.plot(ratio)
     plt.show()
 
