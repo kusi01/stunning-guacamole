@@ -33,8 +33,9 @@ def imp_data(path):
 
 
 if __name__ == "__main__":
-    data = imp_data("../../resource/Zapis3.txt")
+    data = imp_data("../../resource/Zapis2.txt")
     number = data[0]
+    summ = 0
     tree = []
     fire = []
     none = []
@@ -48,6 +49,8 @@ if __name__ == "__main__":
                 ratio.append(0)
             else:
                 ratio.append(x["fire"]/(x["tree"]+x["fire"]))
+
+    print(f"Średnia gęstość lasu to {sum(tree)/100}")
     plt.figure(figsize=(16, 4))
     plt.subplot(141)
     plt.title("Ile jest % nie palących się drzew")
