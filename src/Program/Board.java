@@ -49,7 +49,7 @@ public class Board {
                 Board2[x][y] = new Cell(x, y, ActualState);
                 if (ActualState == "Empty") {
                     float z = random.nextInt(1, 10001)/100;
-                    if (z <= ProbabilityTree) {
+                    if (z < ProbabilityTree) {
                         Board2[x][y].SetState("Tree");
                     }
                 } else if (ActualState == "Tree") {
@@ -62,7 +62,7 @@ public class Board {
                             }
                             }} if(Board[x][y].getState() == "Tree") {
                                 float p = random.nextInt(1, 10001)/100;
-                                if (p <= ProbabilityLightning) {
+                                if (p < ProbabilityLightning) {
                                     Board2[x][y].SetState("Burning");
                                 }
                             }

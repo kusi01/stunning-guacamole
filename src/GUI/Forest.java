@@ -20,6 +20,7 @@ public class Forest extends JFrame implements ActionListener {
     private JButton Next;
     private JButton Tick;
     private JButton Stop;
+    private JTextField Counter;
     private Boolean S = false;
     Integer[] choices = {1000, 750, 500, 250, 100};
     private JComboBox<Integer> time = new JComboBox<Integer>(choices);
@@ -46,11 +47,15 @@ public class Forest extends JFrame implements ActionListener {
 
         add(time);
 
+        Counter = new JTextField("0",4);
+        Counter.setEditable(false);
+        add(Counter);
+
         Next = new JButton("Next");
         Next.addActionListener((ActionListener) this);
         add(Next);
 
-        Tick = new JButton("Next2");
+        Tick = new JButton("Start");
         Tick.addActionListener((ActionListener) this);
         add(Tick);
 
@@ -89,6 +94,7 @@ public class Forest extends JFrame implements ActionListener {
                 float ProL1 = Float.parseFloat(ProL.getText());
                 float ProT1 = Float.parseFloat(ProT.getText());
                 pl.NextState(ProL1, ProT1);
+                Counter.setText(String.valueOf(Integer.parseInt(Counter.getText())+1));
                 repaint();
             }
         }
